@@ -72,6 +72,12 @@
   .cs-next .links a:hover { border-color: var(--accent); color: var(--accent); }
   .cs-next .links a.cta { background: var(--accent); color: #0a0b0e; border-bottom: none; border-radius: 6px; padding: 9px 18px 10px; font-weight: 600; }
 
+  .exhibit { margin-top: 5vh; max-width: 780px; }
+  .exhibit .frame { background: #0d1015; border: 1px solid var(--line); border-radius: 10px; padding: 22px 18px 16px; }
+  .exhibit svg { display: block; width: 100%; height: auto; }
+  .exhibit svg text { font-family: var(--mono); }
+  .exhibit figcaption { margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+
   footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 26px 4vw; border-top: 1px solid var(--line); }
   footer .mono { font-size: 10px; }
 
@@ -124,6 +130,85 @@
       <li><span class="tag">Artifact engine</span>The layer that lets agents ship finished work: verified PDFs, decks, flyers, websites, video, and audio — renders gated by automated verification, with failure → retry → pass behavior.</li>
       <li><span class="tag">Eval gates</span>Eval benches gate every release — prompt and tool changes don't ship without passing the suite.</li>
     </ul>
+
+    <figure class="exhibit">
+      <div class="frame">
+      <svg viewBox="0 0 720 330" role="img" aria-label="BrokerBot platform architecture diagram">
+        <defs>
+          <marker id="arr" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+            <path d="M0,0 L6,3.5 L0,7 Z" fill="#8a877e"/>
+          </marker>
+          <marker id="arrA" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+            <path d="M0,0 L6,3.5 L0,7 Z" fill="#e0a436"/>
+          </marker>
+        </defs>
+
+        <!-- SOURCES -->
+        <text x="24" y="58" font-size="9" letter-spacing="1.5" fill="#8a877e">SOURCES</text>
+        <g font-size="9" letter-spacing="1" fill="#a9a49a">
+          <rect x="24" y="72" width="110" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+          <text x="79" y="90" text-anchor="middle">documents</text>
+          <rect x="24" y="112" width="110" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+          <text x="79" y="130" text-anchor="middle">web sources</text>
+          <rect x="24" y="152" width="110" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+          <text x="79" y="170" text-anchor="middle">cloud connectors</text>
+        </g>
+
+        <!-- KNOWLEDGE BASE -->
+        <text x="178" y="58" font-size="9" letter-spacing="1.5" fill="#8a877e">KNOWLEDGE BASE</text>
+        <rect x="178" y="72" width="140" height="110" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+        <text x="248" y="98" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#ece9e1">INGEST</text>
+        <text x="248" y="118" text-anchor="middle" font-size="8.5" fill="#8a877e">parse · categorize</text>
+        <text x="248" y="133" text-anchor="middle" font-size="8.5" fill="#8a877e">embed · extract</text>
+        <line x1="196" y1="150" x2="300" y2="150" stroke="rgba(236,233,225,.13)"/>
+        <text x="248" y="167" text-anchor="middle" font-size="8.5" fill="#8a877e">hybrid retrieve · cite</text>
+
+        <!-- HARNESS boundary -->
+        <rect x="352" y="34" width="204" height="212" rx="10" fill="none" stroke="rgba(224,164,54,.5)" stroke-dasharray="5 5"/>
+        <text x="454" y="26" font-size="9" letter-spacing="1.5" fill="#e0a436" text-anchor="middle">AGENT HARNESS</text>
+
+        <rect x="372" y="52" width="164" height="52" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+        <text x="454" y="74" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#ece9e1">MODEL</text>
+        <text x="454" y="92" text-anchor="middle" font-size="8.5" fill="#8a877e">reason · plan · cite</text>
+
+        <rect x="372" y="130" width="164" height="52" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+        <text x="454" y="152" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#ece9e1">TOOLS · ~120 MCP</text>
+        <text x="454" y="170" text-anchor="middle" font-size="8.5" fill="#8a877e">permissioned · compliance-fenced</text>
+
+        <!-- loop between model and tools -->
+        <path d="M 418 104 L 418 130" stroke="#e0a436" stroke-width="1.4" fill="none" marker-end="url(#arrA)"/>
+        <path d="M 490 130 L 490 104" stroke="#e0a436" stroke-width="1.4" fill="none" marker-end="url(#arrA)"/>
+
+        <rect x="392" y="200" width="124" height="26" rx="13" fill="none" stroke="rgba(224,164,54,.45)"/>
+        <text x="454" y="216" text-anchor="middle" font-size="8.5" letter-spacing="1" fill="#e0a436">EVAL GATE · HITL</text>
+
+        <!-- ARTIFACT -->
+        <text x="594" y="58" font-size="9" letter-spacing="1.5" fill="#8a877e">ARTIFACT</text>
+        <rect x="594" y="72" width="102" height="110" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
+        <text x="645" y="98" text-anchor="middle" font-size="10" letter-spacing="1.5" fill="#ece9e1">ENGINE</text>
+        <text x="645" y="118" text-anchor="middle" font-size="8.5" fill="#8a877e">template · render</text>
+        <text x="645" y="133" text-anchor="middle" font-size="8.5" fill="#8a877e">verify · retry</text>
+        <text x="645" y="166" text-anchor="middle" font-size="8.5" fill="#a9a49a">pdf · deck · flyer</text>
+        <text x="645" y="178" text-anchor="middle" font-size="8.5" fill="#a9a49a">site · video · audio</text>
+
+        <!-- edges -->
+        <line x1="134" y1="87" x2="172" y2="102" stroke="#8a877e" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="134" y1="127" x2="172" y2="127" stroke="#8a877e" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="134" y1="167" x2="172" y2="152" stroke="#8a877e" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="318" y1="127" x2="366" y2="86" stroke="#8a877e" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="318" y1="140" x2="366" y2="150" stroke="#8a877e" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="556" y1="127" x2="588" y2="127" stroke="#e0a436" stroke-width="1.4" marker-end="url(#arrA)"/>
+
+        <!-- telemetry rail -->
+        <line x1="178" y1="276" x2="696" y2="276" stroke="rgba(236,233,225,.18)" stroke-dasharray="3 5"/>
+        <line x1="248" y1="182" x2="248" y2="276" stroke="rgba(236,233,225,.12)" stroke-dasharray="3 5"/>
+        <line x1="454" y1="246" x2="454" y2="276" stroke="rgba(236,233,225,.12)" stroke-dasharray="3 5"/>
+        <line x1="645" y1="182" x2="645" y2="276" stroke="rgba(236,233,225,.12)" stroke-dasharray="3 5"/>
+        <text x="437" y="300" text-anchor="middle" font-size="9" letter-spacing="1.5" fill="#8a877e">TELEMETRY RAIL — PER-STEP TOKEN + COST · REPLAYABLE RUNS · EVAL-GATED RELEASES</text>
+      </svg>
+      </div>
+      <figcaption>Fig 1 — the platform: sources → knowledge base → governed agent loop → verified artifacts, telemetry under everything</figcaption>
+    </figure>
   </div>
 </section>
 
