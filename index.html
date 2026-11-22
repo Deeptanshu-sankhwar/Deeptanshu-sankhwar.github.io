@@ -15,7 +15,7 @@
     --bg: #0a0b0e;
     --panel: #101318;
     --text: #ece9e1;
-    --dim: #6f6d66;
+    --dim: #8a877e;
     --line: rgba(236,233,225,.13);
     --accent: #e0a436;
     --ok: #4fc46a;
@@ -48,12 +48,17 @@
   h1 { font-weight: 700; letter-spacing: -.035em; line-height: .92; font-size: clamp(48px, 8.2vw, 118px); text-transform: uppercase; }
   h1 .row2 { display: block; color: transparent; -webkit-text-stroke: 1.5px var(--text); }
   h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--accent); -webkit-text-stroke: 0; }
-  .hero .sub { margin-top: 4vh; max-width: 560px; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: #a9a49a; }
+  .hero .lede { margin-top: 3.6vh; font-size: clamp(21px, 2.5vw, 32px); font-weight: 600; letter-spacing: -.02em; line-height: 1.25; color: var(--text); max-width: 560px; }
+  .hero .lede em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); }
+  .hero .sub { margin-top: 2.2vh; max-width: 560px; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: #a9a49a; }
   .hero .sub b { color: var(--text); font-weight: 600; }
   .hero .links { margin-top: 3.4vh; display: flex; flex-wrap: wrap; gap: 10px 28px; }
   .hero .links a { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line); padding-bottom: 3px; transition: border-color .25s, color .25s; }
   .hero .links a:hover { border-color: var(--accent); color: var(--accent); }
-  .hero .links a::after { content: " ↗"; font-size: 10px; }
+  .hero .links a::after { content: " →"; font-size: 10px; }
+  .hero .links a.cta { background: var(--accent); color: #0a0b0e; border-bottom: none; border-radius: 6px; padding: 7px 16px 8px; font-weight: 600; }
+  .hero .links a.cta::after { content: none; }
+  .hero .links a.cta:hover { background: #f0bd55; color: #0a0b0e; }
 
   /* ---------- agent loop svg ---------- */
   .loopbox { position: relative; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px; overflow: hidden; }
@@ -291,6 +296,8 @@
 
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--line); padding: 10vh 4vw 34px; }
+  .footer-ask { font-size: clamp(18px, 2vw, 26px); color: var(--dim); max-width: 640px; line-height: 1.45; margin-bottom: 4vh; }
+  .footer-ask em { font-family: var(--serif); font-style: italic; color: var(--text); }
   .footer-giant { font-size: clamp(44px, 9.5vw, 140px); font-weight: 700; letter-spacing: -.04em; line-height: .95; text-transform: uppercase; display: block; }
   .footer-giant em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--accent); }
   .footer-giant:hover em { color: var(--text); }
@@ -348,8 +355,8 @@
 <nav>
   <div class="mark">Deeptanshu Sankhwar<sup>©</sup></div>
   <ul>
-    <li><a href="#systems">Systems</a></li>
     <li><a href="#work">Work</a></li>
+    <li><a href="#systems">Systems</a></li>
     <li><a href="#lab">Lab</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -358,17 +365,18 @@
 <header class="hero">
   <div>
     <div class="eyebrow">
-      <span class="mono">Senior AI Engineer</span>
+      <span class="mono">Founding Engineer · AI Systems</span>
       <span class="mono live">Available for select work</span>
     </div>
     <h1>Deeptanshu <span class="row2">Sankhwar<em>.</em></span></h1>
+    <p class="lede">I make AI agents work in <em>production</em>.</p>
     <p class="sub">I build <b>the harness</b>: agent loops, permissioned tools, eval gates. <b>The retrieval layer</b> that grounds them: hybrid search, rerank, citation-proven chunks. And the <b>artifact layer</b> that lets agents ship finished work. Models are commoditizing; dependable agent systems are not.</p>
     <div class="links">
+      <a class="cta" href="mailto:deeptanshu.sankhwar@gmail.com">Discuss a project</a>
       <a href="https://github.com/Deeptanshu-sankhwar">GitHub</a>
       <a href="https://www.linkedin.com/in/deeptanshu-sankhwar-b311b9192/">LinkedIn</a>
       <a href="https://www.youtube.com/@deeptanshusankhwar646">YouTube</a>
       <a href="https://medium.com/@deeptanshu.sankhwar">Medium</a>
-      <a href="mailto:deeptanshu.sankhwar@gmail.com">Email</a>
     </div>
   </div>
 
@@ -454,10 +462,97 @@
   </div>
 </div>
 
+<section class="index" id="work">
+  <div class="index-head">
+    <h2>Selected Work</h2>
+    <span class="mono">2021 — 2026 · hover for preview</span>
+  </div>
+
+  <a class="row" href="https://brokerbot.ai" target="_blank" rel="noopener" data-thumb="assets/brokerbot-live.png">
+    <div class="inner">
+      <span class="num">01</span>
+      <span class="title">BrokerBot</span>
+      <span class="meta"><span class="role">Agentic Harness · Artifact Engine</span><span class="stat">~120 MCP tools · verified renders</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Owned the knowledge base, the agent, and the harness of a multi-tenant real-estate AI platform. Tool-calling loop over ~120 MCP tools, compliance-fenced prompts, eval-gated releases, per-step token + cost telemetry — and the artifact engine on top: verified PDFs, decks, flyers, sites, video, audio.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://balancelifedesign.com/" target="_blank" rel="noopener" data-thumb="assets/moments.png">
+    <div class="inner">
+      <span class="num">02</span>
+      <span class="title">Balance Life Design</span>
+      <span class="meta"><span class="role">Founding Engineer · Agentic AI</span><span class="stat">seed-funded · 1,000+ users</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Architected the entire AI infrastructure from scratch. Plus Nimbus: a Rust/WASM agent harness — edge gateway, resumable streaming, durable session state machine, approval gate, memory on Postgres.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://clearsportsapi.com" target="_blank" rel="noopener" data-thumb="assets/clearsports.webp">
+    <div class="inner">
+      <span class="num">03</span>
+      <span class="title">ClearSports API</span>
+      <span class="meta"><span class="role">Founder · Multi-tenant SaaS</span><span class="stat">production · MCP server</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">My own API business: ~10 third-party feeds normalized behind one schema, per-customer keys with usage metering, Stripe tiers, docs, and a shipped MCP server so agents query it natively.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://anchormark.dev" target="_blank" rel="noopener">
+    <div class="inner">
+      <span class="num">04</span>
+      <span class="title">AnchorMark</span>
+      <span class="meta"><span class="role">Founder · PDF Intelligence API</span><span class="stat">citation geometry</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Self-serve API turning PDFs into grounded markdown + RAG chunks with per-block page and bounding-box provenance. Cloudflare Workers, isolated containers, R2, Queues, credit metering.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://coloradocornlibrary.duckdns.org/" target="_blank" rel="noopener" data-thumb="assets/ccc.png">
+    <div class="inner">
+      <span class="num">05</span>
+      <span class="title">Colorado Corn AI</span>
+      <span class="meta"><span class="role">Client · Hybrid-Retrieval RAG</span><span class="stat">512 benchmark runs</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">pgvector + BM25 with RRF fusion and Cohere rerank over a private research library. Citation-grounded answers with bounding-box highlights on the source PDF; admin panel + audit log; 20+ participant focus group.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://axsports.ai/welcome" target="_blank" rel="noopener">
+    <div class="inner">
+      <span class="num">06</span>
+      <span class="title">WinBets</span>
+      <span class="meta"><span class="role">Senior Lead · AI Platform</span><span class="stat">10,000+ beta testers</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Azure microservices, multi-source pooling across ESPN, RotoWire and 5+ providers. Built "Clutch": an AI memory layer serving personalized predictions through conversation.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://www.getvakaru.com/" target="_blank" rel="noopener">
+    <div class="inner">
+      <span class="num">07</span>
+      <span class="title">Vakaru</span>
+      <span class="meta"><span class="role">Founding AI Engineer</span><span class="stat">3× recovery · $500K seed</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Shopify churn prediction at 85%+ accuracy plus hyper-personalized recovery via OpenAI tool calls. The intelligence layer that helped secure $500K+ in seed funding.</p>
+    </div>
+  </a>
+
+  <a class="row" href="https://frequentfan.com" target="_blank" rel="noopener">
+    <div class="inner">
+      <span class="num">08</span>
+      <span class="title">FrequentFan</span>
+      <span class="meta"><span class="role">Client · Sports Membership Platform</span><span class="stat">$1.2M seed · audited ledger</span></span>
+      <span class="arrow">→</span>
+      <p class="detail">Java 21 / Spring Boot backend + React member app for a sports fan-loyalty platform: Stripe payments, invite-only membership, and an FF-Points ledger where every mutation is transactional, audited, and dual-approved.</p>
+    </div>
+  </a>
+</section>
+
 <section class="systems" id="systems">
   <div class="sys-head">
-    <h2>The work, shown</h2>
-    <span class="mono">running, not screenshots</span>
+    <h2>The engineering, shown</h2>
+    <span class="mono">scripted demos · representative workflows</span>
   </div>
 
   <!-- MODULE 1: tool calls -->
@@ -573,92 +668,6 @@
   </div>
 </section>
 
-<section class="index" id="work">
-  <div class="index-head">
-    <h2>Selected Work</h2>
-    <span class="mono">2021 — 2026 · hover for preview</span>
-  </div>
-
-  <a class="row" href="https://brokerbot.ai" target="_blank" rel="noopener" data-thumb="assets/brokerbot-live.png">
-    <div class="inner">
-      <span class="num">01</span>
-      <span class="title">BrokerBot</span>
-      <span class="meta"><span class="role">Agentic Harness · Artifact Engine</span><span class="stat">~120 MCP tools · verified renders</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Owned the knowledge base, the agent, and the harness of a multi-tenant real-estate AI platform. Tool-calling loop over ~120 MCP tools, compliance-fenced prompts, eval-gated releases, per-step token + cost telemetry — and the artifact engine on top: verified PDFs, decks, flyers, sites, video, audio.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://balancelifedesign.com/" target="_blank" rel="noopener" data-thumb="assets/moments.png">
-    <div class="inner">
-      <span class="num">02</span>
-      <span class="title">Balance Life Design</span>
-      <span class="meta"><span class="role">Founding Engineer · Agentic AI</span><span class="stat">seed-funded · 1,000+ users</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Architected the entire AI infrastructure from scratch. Plus Nimbus: a Rust/WASM agent harness — edge gateway, resumable streaming, durable session state machine, approval gate, memory on Postgres.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://clearsportsapi.com" target="_blank" rel="noopener" data-thumb="assets/clearsports.webp">
-    <div class="inner">
-      <span class="num">03</span>
-      <span class="title">ClearSports API</span>
-      <span class="meta"><span class="role">Founder · Multi-tenant SaaS</span><span class="stat">production · MCP server</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">My own API business: ~10 third-party feeds normalized behind one schema, per-customer keys with usage metering, Stripe tiers, docs, and a shipped MCP server so agents query it natively.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://anchormark.dev" target="_blank" rel="noopener">
-    <div class="inner">
-      <span class="num">04</span>
-      <span class="title">AnchorMark</span>
-      <span class="meta"><span class="role">Founder · PDF Intelligence API</span><span class="stat">citation geometry</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Self-serve API turning PDFs into grounded markdown + RAG chunks with per-block page and bounding-box provenance. Cloudflare Workers, isolated containers, R2, Queues, credit metering.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://coloradocornlibrary.duckdns.org/" target="_blank" rel="noopener" data-thumb="assets/ccc.png">
-    <div class="inner">
-      <span class="num">05</span>
-      <span class="title">Colorado Corn AI</span>
-      <span class="meta"><span class="role">Client · Hybrid-Retrieval RAG</span><span class="stat">512 benchmark runs</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">pgvector + BM25 with RRF fusion and Cohere rerank over a private research library. Citation-grounded answers with bounding-box highlights on the source PDF; admin panel + audit log; 20+ participant focus group.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://axsports.ai/welcome" target="_blank" rel="noopener">
-    <div class="inner">
-      <span class="num">06</span>
-      <span class="title">WinBets</span>
-      <span class="meta"><span class="role">Senior Lead · AI Platform</span><span class="stat">10,000+ beta testers</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Azure microservices, multi-source pooling across ESPN, RotoWire and 5+ providers. Built "Clutch": an AI memory layer serving personalized predictions through conversation.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://www.getvakaru.com/" target="_blank" rel="noopener">
-    <div class="inner">
-      <span class="num">07</span>
-      <span class="title">Vakaru</span>
-      <span class="meta"><span class="role">Founding AI Engineer</span><span class="stat">3× recovery · $500K seed</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Shopify churn prediction at 85%+ accuracy plus hyper-personalized recovery via OpenAI tool calls. The intelligence layer directly enabled $500K+ in seed funding.</p>
-    </div>
-  </a>
-
-  <a class="row" href="https://frequentfan.com" target="_blank" rel="noopener">
-    <div class="inner">
-      <span class="num">08</span>
-      <span class="title">FrequentFan</span>
-      <span class="meta"><span class="role">Client · Sports Membership Platform</span><span class="stat">$1.2M seed · audited ledger</span></span>
-      <span class="arrow">↗</span>
-      <p class="detail">Java 21 / Spring Boot backend + React member app for a sports fan-loyalty platform: Stripe payments, invite-only membership, and an FF-Points ledger where every mutation is transactional, audited, and dual-approved.</p>
-    </div>
-  </a>
-</section>
 <div id="thumb"><img alt=""></div>
 
 <section class="numbers">
@@ -683,10 +692,10 @@
     <span class="mono">agents · consensus · zk</span>
   </div>
   <ul>
-    <li><a href="https://chaoscha.in/" target="_blank" rel="noopener"><span class="t">ChaosChain</span><span class="d">#1 contributor: agentic consensus, multi-round AI discussion before voting, EIP-fine-tuned LangGraph agent</span><span class="arw">↗</span></a></li>
-    <li><a href="https://tubedao.org" target="_blank" rel="noopener"><span class="t">Datomacy</span><span class="d">Vana Academy grant: privacy-first YouTube data DAO, TEE compute, Proof-of-Contribution</span><span class="arw">↗</span></a></li>
-    <li><a href="https://github.com/Deeptanshu-sankhwar/horizonml" target="_blank" rel="noopener"><span class="t">HorizonML</span><span class="d">model-parallel distributed training on edge devices, 10-metric benchmark vs PyTorch DDP</span><span class="arw">↗</span></a></li>
-    <li><a href="https://github.com/Deeptanshu-sankhwar/MCPChain" target="_blank" rel="noopener"><span class="t">MCPChain</span><span class="d">Cosmos SDK L1 anchoring MCP tools, trust registries and attestable executions on-chain</span><span class="arw">↗</span></a></li>
+    <li><a href="https://chaoscha.in/" target="_blank" rel="noopener"><span class="t">ChaosChain</span><span class="d">#1 contributor: agentic consensus, multi-round AI discussion before voting, EIP-fine-tuned LangGraph agent</span><span class="arw">→</span></a></li>
+    <li><a href="https://tubedao.org" target="_blank" rel="noopener"><span class="t">Datomacy</span><span class="d">Vana Academy grant: privacy-first YouTube data DAO, TEE compute, Proof-of-Contribution</span><span class="arw">→</span></a></li>
+    <li><a href="https://github.com/Deeptanshu-sankhwar/horizonml" target="_blank" rel="noopener"><span class="t">HorizonML</span><span class="d">model-parallel distributed training on edge devices, 10-metric benchmark vs PyTorch DDP</span><span class="arw">→</span></a></li>
+    <li><a href="https://github.com/Deeptanshu-sankhwar/MCPChain" target="_blank" rel="noopener"><span class="t">MCPChain</span><span class="d">Cosmos SDK L1 anchoring MCP tools, trust registries and attestable executions on-chain</span><span class="arw">→</span></a></li>
   </ul>
 </section>
 
@@ -700,12 +709,14 @@
     <ul>
       <li><a href="https://youtu.be/8JRo7xTIGU4?si=YxAQzlwdX98sNMRA">AI agents governing consensus</a> — decentralized agent networks</li>
       <li><a href="https://youtu.be/Jak8y6zBF4U?si=YoOLAXk2wsSIIwuh&amp;t=1257">MindsDB meetup</a> — invited talk, live knowledge-base demo</li>
+      <li>ETH Tokyo 2025 — speaker</li>
       <li><a href="https://www.youtube.com/@deeptanshusankhwar646">Channel</a> — builds, agents, talks</li>
     </ul>
   </div>
 </section>
 
 <footer id="contact">
+  <p class="footer-ask">Building an AI system that needs to work <em>reliably</em>? Tell me what you're building.</p>
   <a class="footer-giant" href="mailto:deeptanshu.sankhwar@gmail.com">Say <em>hello</em></a>
   <div class="footer-grid">
     <div class="mono"><a href="mailto:deeptanshu.sankhwar@gmail.com">deeptanshu.sankhwar@gmail.com</a><br>Boulder, Colorado</div>
