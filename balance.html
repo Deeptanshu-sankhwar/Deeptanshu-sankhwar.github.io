@@ -73,8 +73,8 @@
   .cs-next .links a.cta { background: var(--accent); color: #0a0b0e; border-bottom: none; border-radius: 6px; padding: 9px 18px 10px; font-weight: 600; }
 
   .exhibit { margin-top: 5vh; max-width: 780px; }
-  .exhibit .frame { background: #0d1015; border: 1px solid var(--line); border-radius: 10px; padding: 22px 18px 16px; }
-  .exhibit svg { display: block; width: 100%; height: auto; }
+  .exhibit .frame { background: #0d1015; border: 1px solid var(--line); border-radius: 10px; padding: 22px 18px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .exhibit svg { display: block; width: 100%; height: auto; min-width: 640px; }
   .exhibit svg text { font-family: var(--mono); }
   .exhibit figcaption { margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
 
@@ -82,7 +82,7 @@
   footer .mono { font-size: 10px; }
 
   @media (max-width: 860px) {
-    .cs-sec { grid-template-columns: 1fr; gap: 18px; }
+    .cs-sec { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .cs-nums .n { border-right: none; border-top: 1px solid var(--line); }
   }
 </style>
@@ -144,9 +144,9 @@
 
         <!-- EDGE panel -->
         <rect x="24" y="52" width="300" height="192" rx="10" fill="#101318" stroke="rgba(236,233,225,.16)"/>
-        <text x="44" y="82" font-size="10" letter-spacing="1.5" fill="#ece9e1">EDGE GATEWAY</text>
-        <text x="44" y="100" font-size="8.5" fill="#8a877e">rust → wasm · cloudflare workers</text>
-        <g font-size="8.5" fill="#a9a49a">
+        <text x="44" y="82" font-size="11.5" letter-spacing="1.5" fill="#ece9e1">EDGE GATEWAY</text>
+        <text x="44" y="100" font-size="10" fill="#8a877e">rust → wasm · cloudflare workers</text>
+        <g font-size="10" fill="#a9a49a">
           <rect x="44" y="116" width="130" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
           <text x="109" y="134" text-anchor="middle">edge auth</text>
           <rect x="184" y="116" width="120" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
@@ -156,15 +156,15 @@
           <rect x="184" y="156" width="120" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
           <text x="244" y="174" text-anchor="middle">wake triggers</text>
         </g>
-        <text x="44" y="222" font-size="8.5" fill="#8a877e">isolated · short-lived · near the user</text>
+        <text x="44" y="222" font-size="10" fill="#8a877e">isolated · short-lived · near the user</text>
 
         <!-- CONTAINER panel -->
         <rect x="396" y="52" width="300" height="192" rx="10" fill="#101318" stroke="rgba(236,233,225,.16)"/>
-        <text x="416" y="82" font-size="10" letter-spacing="1.5" fill="#ece9e1">ORCHESTRATOR</text>
-        <text x="416" y="100" font-size="8.5" fill="#8a877e">rust · axum · cloudflare containers</text>
-        <g font-size="8.5" fill="#a9a49a">
+        <text x="416" y="82" font-size="11.5" letter-spacing="1.5" fill="#ece9e1">ORCHESTRATOR</text>
+        <text x="416" y="100" font-size="10" fill="#8a877e">rust · axum · cloudflare containers</text>
+        <g font-size="10" fill="#a9a49a">
           <rect x="416" y="116" width="130" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
-          <text x="481" y="134" text-anchor="middle">session state machine</text>
+          <text x="481" y="134" text-anchor="middle">session state</text>
           <rect x="556" y="116" width="120" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
           <text x="616" y="134" text-anchor="middle">tool loop</text>
           <rect x="416" y="156" width="130" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
@@ -172,20 +172,20 @@
           <rect x="556" y="156" width="120" height="30" rx="5" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
           <text x="616" y="174" text-anchor="middle">scheduling</text>
         </g>
-        <text x="416" y="222" font-size="8.5" fill="#8a877e">long-running · where workers can't go</text>
+        <text x="416" y="222" font-size="10" fill="#8a877e">long-running · where workers can't go</text>
 
         <!-- exchange arrows -->
         <line x1="330" y1="138" x2="390" y2="138" stroke="#e0a436" stroke-width="1.4" marker-end="url(#arr)"/>
-        <text x="360" y="128" text-anchor="middle" font-size="8" fill="#e0a436">resume</text>
+        <text x="360" y="128" text-anchor="middle" font-size="9.5" fill="#e0a436">resume</text>
         <line x1="390" y1="166" x2="330" y2="166" stroke="#8a877e" stroke-width="1" marker-end="url(#arrL)"/>
-        <text x="360" y="160" text-anchor="middle" font-size="8" fill="#8a877e">session</text>
+        <text x="360" y="160" text-anchor="middle" font-size="9.5" fill="#8a877e">session</text>
 
         <!-- Postgres -->
         <line x1="546" y1="244" x2="546" y2="276" stroke="rgba(236,233,225,.3)" stroke-width="1" marker-end="url(#arrL)"/>
         <rect x="426" y="278" width="240" height="34" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
-        <text x="546" y="299" text-anchor="middle" font-size="9" letter-spacing="1" fill="#a9a49a">POSTGRES — SESSION + MEMORY</text>
+        <text x="546" y="299" text-anchor="middle" font-size="10.5" letter-spacing="1" fill="#a9a49a">POSTGRES — SESSION + MEMORY</text>
 
-        <text x="360" y="330" text-anchor="middle" font-size="9" letter-spacing="1.5" fill="#8a877e">TWO COMPUTE MODELS · ONE SYSTEM — REBUILD UNDER FLIGHT, NO FLAG DAY</text>
+        <text x="360" y="330" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#8a877e">TWO COMPUTE MODELS · ONE SYSTEM — REBUILD UNDER FLIGHT, NO FLAG DAY</text>
       </svg>
       </div>
       <figcaption>Fig 1 — the nimbus split: stateless WASM ingress at the edge, stateful orchestration in containers, Postgres as the durable floor</figcaption>
