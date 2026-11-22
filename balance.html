@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Balance Life Design — Deeptanshu Sankhwar</title>
+<meta name="description" content="Case study: founding-engineer build of production AI infrastructure for an adaptive life-OS — and the Rust/WASM agent harness rebuild that followed." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Balance Life Design — case study · Deeptanshu Sankhwar" />
+<meta property="og:description" content="Zero-to-one AI infrastructure that helped secure seed funding, then a Rust/WASM agent harness rebuild." />
+<meta property="og:image" content="https://deeptanshu-sankhwar.github.io/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --panel: #101318;
+    --text: #ece9e1;
+    --dim: #8a877e;
+    --line: rgba(236,233,225,.13);
+    --accent: #e0a436;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    --sans: "Helvetica Neue", Helvetica, Inter, -apple-system, Arial, sans-serif;
+    --serif: "New York", "Times New Roman", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--accent); color: #0a0b0e; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 4vw; }
+  nav .mark { font-family: var(--mono); font-size: 13px; }
+  nav .mark sup { color: var(--accent); }
+  nav .back { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); transition: color .25s; }
+  nav .back:hover { color: var(--text); }
+
+  .cs-hero { padding: 9vh 4vw 5vh; }
+  .cs-hero .eyebrow { display: flex; gap: 26px; flex-wrap: wrap; row-gap: 10px; margin-bottom: 3.5vh; }
+  h1 { font-weight: 700; letter-spacing: -.035em; line-height: .95; font-size: clamp(40px, 6.8vw, 96px); text-transform: uppercase; }
+  h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--accent); }
+  .cs-hero .lede { margin-top: 3.2vh; font-size: clamp(19px, 2.1vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.3; max-width: 720px; }
+  .cs-hero .lede em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); }
+  .metarow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4vh; }
+  .metarow span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+  .metarow span.hot { color: var(--accent); border-color: rgba(224,164,54,.45); }
+  .metarow a { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; transition: border-color .25s, color .25s; }
+  .metarow a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .cs-sec { display: grid; grid-template-columns: 240px 1fr; gap: 4vw; padding: 7vh 4vw; border-top: 1px solid var(--line); }
+  .cs-sec .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .cs-sec h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 650; letter-spacing: -.025em; line-height: 1.1; margin-bottom: 3vh; }
+  .cs-sec p { font-size: 16px; line-height: 1.75; color: var(--dim); max-width: 700px; }
+  .cs-sec p + p { margin-top: 1.2em; }
+  .cs-sec p b, .cs-sec li b { color: var(--text); font-weight: 600; }
+  .cs-sec ul { list-style: none; max-width: 700px; }
+  .cs-sec li { position: relative; font-size: 16px; line-height: 1.7; color: var(--dim); padding: 14px 0 14px 30px; border-bottom: 1px solid var(--line); }
+  .cs-sec li:last-child { border-bottom: none; }
+  .cs-sec li::before { content: ""; position: absolute; left: 0; top: 26px; width: 14px; height: 1px; background: var(--accent); }
+  .cs-sec li .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+
+  .cs-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); border-top: 1px solid var(--line); }
+  .cs-nums .n { padding: 44px 4vw; border-right: 1px solid var(--line); }
+  .cs-nums .n:last-child { border-right: none; }
+  .cs-nums .v { font-size: clamp(40px, 5vw, 72px); font-weight: 700; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .cs-nums .v i { font-style: normal; color: var(--accent); }
+  .cs-nums .k { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--dim); max-width: 240px; }
+
+  .cs-next { padding: 9vh 4vw; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
+  .cs-next .ask { font-size: clamp(19px, 2.1vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.3; max-width: 560px; }
+  .cs-next .links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .cs-next .links a { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line); padding-bottom: 3px; transition: border-color .25s, color .25s; }
+  .cs-next .links a:hover { border-color: var(--accent); color: var(--accent); }
+  .cs-next .links a.cta { background: var(--accent); color: #0a0b0e; border-bottom: none; border-radius: 6px; padding: 9px 18px 10px; font-weight: 600; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 26px 4vw; border-top: 1px solid var(--line); }
+  footer .mono { font-size: 10px; }
+
+  @media (max-width: 860px) {
+    .cs-sec { grid-template-columns: 1fr; gap: 18px; }
+    .cs-nums .n { border-right: none; border-top: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="mark">deeptanshu<sup>.</sup>sankhwar</span>
+  <a class="back" href="index.html#work">← Selected work</a>
+</nav>
+
+<header class="cs-hero">
+  <div class="eyebrow">
+    <span class="mono">Case Study 02</span>
+    <span class="mono">Consumer AI · Seed-stage</span>
+  </div>
+  <h1>Balance Life <em>Design</em></h1>
+  <p class="lede">Founding-engineer build of the AI infrastructure behind an adaptive <em>life operating system</em> — and the Rust/WASM agent harness rebuild that followed.</p>
+  <div class="metarow">
+    <span class="hot">Founding Engineer</span>
+    <span>TypeScript · FastAPI · Rust · WASM</span>
+    <span>Agent harness · Edge compute</span>
+    <a href="https://balancelifedesign.com/" target="_blank" rel="noopener">balancelifedesign.com →</a>
+  </div>
+</header>
+
+<section class="cs-sec">
+  <span class="lbl">01 · Problem</span>
+  <div>
+    <h2>Zero-to-one AI infrastructure that had to survive investor scrutiny.</h2>
+    <p>Balance is a seed-stage startup building an adaptive life operating system — a consumer AI product that learns from user behavior. They needed the entire AI infrastructure architected and shipped from scratch, not an LLM call bolted onto an existing app.</p>
+    <p>The fundraising round depended on the infrastructure being demonstrably production-grade, not demo-grade — while the product team still needed to iterate on agent behavior weekly without breaking determinism.</p>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">02 · What I built</span>
+  <div>
+    <h2>The whole AI stack, then the harness it deserved.</h2>
+    <ul>
+      <li><span class="tag">AI infrastructure, zero to one</span>Agent orchestration, function-calling specs, prompt management, observability, and feedback loops — architected and shipped from scratch.</li>
+      <li><span class="tag">Agentic behaviors</span>Production-grade agentic AI on OpenAI function-calling specifications — structured tool use rather than free-form generation.</li>
+      <li><span class="tag">Determinism + debugging</span>Langfuse for deterministic AI behavior, prompt versioning, and self-learning feedback loops — the system could be debugged, audited, and improved, not black-boxed.</li>
+      <li><span class="tag">Full-stack platform</span>TypeScript/Next.js frontend + FastAPI backend on Heroku pipelines, with PostHog session replay and heatmaps closing the loop between product behavior and AI behavior.</li>
+      <li><span class="tag">Nimbus — the harness rebuild</span>When the agent workload outgrew the TypeScript harness: a Rust→WASM edge gateway on Cloudflare Workers (auth, streaming with resume, rate limits, wake triggers) plus a Rust orchestrator in containers — session state machine, tool loop, memory on Postgres, approval gate, scheduling.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">03 · Engineering decisions</span>
+  <div>
+    <h2>Chosen for control, not fashion.</h2>
+    <ul>
+      <li><span class="tag">Determinism first</span>Prompt versioning and traced runs from day one — because "the agent did something weird" is only debuggable if behavior is reproducible.</li>
+      <li><span class="tag">WASM at the edge</span>The gateway compiles to WASM on Workers for cold-start-free ingress; the long-running parts Workers can't hold live in containers — two compute models presenting as one system.</li>
+      <li><span class="tag">A real state machine</span>Session and tool-loop correctness modeled as an explicit state machine, not framework magic — because resumability has to be provable, not hopeful.</li>
+      <li><span class="tag">Rebuild under flight</span>The TypeScript product kept serving users while the harness was rebuilt in phases — no flag day, no downtime gamble.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">04 · What made it hard</span>
+  <div>
+    <h2>No infrastructure to lean on, no definition of correct.</h2>
+    <p>A founding-engineer brief on a consumer AI product means no existing infrastructure, no eval data, and no taxonomy for what "correct" agent behavior looks like — you build the definition while building the system. Streaming-with-resume at the edge is easy to demo and genuinely hard to make correct. And the rebuild had to prove itself beside a live product that couldn't afford a misstep.</p>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">05 · Outcome</span>
+  <div>
+    <h2>Infrastructure that carried a fundraise.</h2>
+    <p>The AI stack I shipped was the demonstrable technical asset during fundraising — the infrastructure helped secure seed funding and onboarded 1,000+ early-access users. The Nimbus harness rebuild is the second act: the same system, re-architected in Rust for the reliability envelope the workload now demands.</p>
+  </div>
+</section>
+
+<div class="cs-nums">
+  <div class="n"><div class="v">0<i>→</i>1</div><div class="k">entire AI infrastructure architected and shipped from scratch</div></div>
+  <div class="n"><div class="v">1<i>K+</i></div><div class="k">early-access users onboarded on the platform</div></div>
+  <div class="n"><div class="v">2</div><div class="k">harness generations: TypeScript product, then Rust/WASM at the edge</div></div>
+</div>
+
+<section class="cs-next">
+  <p class="ask">Need AI infrastructure built to survive scrutiny — investors', or production's?</p>
+  <div class="links">
+    <a class="cta" href="mailto:deeptanshu.sankhwar@gmail.com">Discuss a project</a>
+    <a href="brokerbot.html">← Previous case study</a>
+    <a href="index.html#work">All work</a>
+  </div>
+</section>
+
+<footer>
+  <span class="mono">Deeptanshu Sankhwar — AI Agent Engineer</span>
+  <span class="mono">© 2026</span>
+</footer>
+
+</body>
+</html>

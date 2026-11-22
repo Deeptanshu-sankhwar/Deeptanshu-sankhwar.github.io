@@ -104,6 +104,8 @@
   /* ---------- systems band ---------- */
   .systems { padding-top: 11vh; }
   .sys-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 4vw 30px; }
+  .sys-intro { margin: -14px 4vw 46px; max-width: 640px; font-size: 15px; line-height: 1.65; color: var(--dim); }
+  .sys-intro b { color: var(--text); font-weight: 600; }
   .sys-head h2 { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); font-weight: 400; }
   .module { display: grid; grid-template-columns: 1fr 1.35fr; gap: 4vw; align-items: center; padding: 7vh 4vw; border-top: 1px solid var(--line); }
   .module.flip { grid-template-columns: 1.35fr 1fr; }
@@ -242,6 +244,8 @@
   .row .meta { text-align: right; transition: color .3s; }
   .row .meta .role { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); display: block; transition: color .3s; }
   .row .meta .stat { font-size: 15px; color: var(--accent); display: block; margin-top: 6px; transition: color .3s; }
+  .row .meta .cs { font-size: 9px; color: var(--accent); border: 1px solid rgba(224,164,54,.45); border-radius: 3px; padding: 2px 7px; margin-left: 8px; vertical-align: 1px; transition: color .3s, border-color .3s; }
+  .row:hover .meta .cs { color: #0a0b0e; border-color: #0a0b0e; }
   .row .detail { grid-column: 2 / 4; max-width: 660px; font-size: 15px; line-height: 1.6; color: var(--dim); max-height: 0; opacity: 0; overflow: hidden; transition: max-height .45s cubic-bezier(.4,0,.2,1), opacity .4s, margin .45s, color .3s; }
   .row:hover .inner { padding-top: 38px; padding-bottom: 38px; }
   .row:hover .detail { max-height: 170px; opacity: 1; margin-top: 14px; }
@@ -372,7 +376,7 @@
     </div>
     <h1>Deeptanshu <span class="row2">Sankhwar<em>.</em></span></h1>
     <p class="lede">I make AI agents work in <em>production</em>.</p>
-    <p class="sub">I build <b>the harness</b>: agent loops, permissioned tools, eval gates. <b>The retrieval layer</b> that grounds them: hybrid search, rerank, citation-proven chunks. And the <b>artifact layer</b> that lets agents ship finished work. Models are commoditizing; dependable agent systems are not.</p>
+    <p class="sub">I architect, build, and harden agent systems that <b>retrieve trustworthy information</b>, <b>use tools safely</b>, <b>recover from failure</b>, and ship finished work.</p>
     <div class="links">
       <a class="cta" href="mailto:deeptanshu.sankhwar@gmail.com">Discuss a project</a>
       <a href="https://github.com/Deeptanshu-sankhwar">GitHub</a>
@@ -470,21 +474,21 @@
     <span class="mono">2021 — 2026 · hover for preview</span>
   </div>
 
-  <a class="row" href="https://brokerbot.ai" target="_blank" rel="noopener" data-thumb="assets/brokerbot-live.png">
+  <a class="row" href="brokerbot.html" data-thumb="assets/brokerbot-live.png">
     <div class="inner">
       <span class="num">01</span>
       <span class="title">BrokerBot</span>
-      <span class="meta"><span class="role">Agentic Harness · Artifact Engine</span><span class="stat">~120 MCP tools · verified renders</span></span>
+      <span class="meta"><span class="role">Agentic Harness · Artifact Engine <span class="cs">case study</span></span><span class="stat">~120 MCP tools · verified renders</span></span>
       <span class="arrow">→</span>
       <p class="detail">Owned the knowledge base, the agent, and the harness of a multi-tenant real-estate AI platform. Tool-calling loop over ~120 MCP tools, compliance-fenced prompts, eval-gated releases, per-step token + cost telemetry — and the artifact engine on top: verified PDFs, decks, flyers, sites, video, audio.</p>
     </div>
   </a>
 
-  <a class="row" href="https://balancelifedesign.com/" target="_blank" rel="noopener" data-thumb="assets/moments.png">
+  <a class="row" href="balance.html" data-thumb="assets/moments.png">
     <div class="inner">
       <span class="num">02</span>
       <span class="title">Balance Life Design</span>
-      <span class="meta"><span class="role">Founding Engineer · Agentic AI</span><span class="stat">seed-funded · 1,000+ users</span></span>
+      <span class="meta"><span class="role">Founding Engineer · Agentic AI <span class="cs">case study</span></span><span class="stat">seed-funded · 1,000+ users</span></span>
       <span class="arrow">→</span>
       <p class="detail">Architected the entire AI infrastructure from scratch. Plus Nimbus: a Rust/WASM agent harness — edge gateway, resumable streaming, durable session state machine, approval gate, memory on Postgres.</p>
     </div>
@@ -556,6 +560,7 @@
     <h2>The engineering, shown</h2>
     <span class="mono">scripted demos · representative workflows</span>
   </div>
+  <p class="sys-intro">Three layers recur across every system I ship: <b>the harness</b> — agent loops, permissioned tools, eval gates; <b>the retrieval layer</b> that grounds them — hybrid search, rerank, citation-proven chunks; and <b>the artifact layer</b> that lets agents ship finished work. Models are commoditizing; dependable agent systems are not.</p>
 
   <!-- MODULE 1: tool calls -->
   <div class="module" data-anim id="mod-tools">
@@ -676,7 +681,6 @@
   <div class="n"><div class="v">2<i>×</i></div><div class="k">seed-funded startups shipped on AI infrastructure I built</div></div>
   <div class="n"><div class="v">10<i>K+</i></div><div class="k">beta testers on an AI platform I led end to end</div></div>
   <div class="n"><div class="v">$100<i>K+</i></div><div class="k">saved annually for BrokerBot with an in-house parsing stack near-matching LlamaParse accuracy</div></div>
-  <div class="n"><div class="v">8<i>K</i></div><div class="k">GitHub contributions this year; top 2% worldwide last year</div></div>
 </section>
 
 <section class="about">

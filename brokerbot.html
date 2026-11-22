@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BrokerBot — Deeptanshu Sankhwar</title>
+<meta name="description" content="Case study: production agent infrastructure for a multi-tenant real-estate AI platform — knowledge base, agent harness, artifact engine." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="BrokerBot — case study · Deeptanshu Sankhwar" />
+<meta property="og:description" content="Knowledge base, agent harness, and verified artifact engine for a production real-estate AI platform." />
+<meta property="og:image" content="https://deeptanshu-sankhwar.github.io/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --panel: #101318;
+    --text: #ece9e1;
+    --dim: #8a877e;
+    --line: rgba(236,233,225,.13);
+    --accent: #e0a436;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+    --sans: "Helvetica Neue", Helvetica, Inter, -apple-system, Arial, sans-serif;
+    --serif: "New York", "Times New Roman", Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: var(--accent); color: #0a0b0e; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 4vw; }
+  nav .mark { font-family: var(--mono); font-size: 13px; }
+  nav .mark sup { color: var(--accent); }
+  nav .back { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); transition: color .25s; }
+  nav .back:hover { color: var(--text); }
+
+  .cs-hero { padding: 9vh 4vw 5vh; }
+  .cs-hero .eyebrow { display: flex; gap: 26px; flex-wrap: wrap; row-gap: 10px; margin-bottom: 3.5vh; }
+  h1 { font-weight: 700; letter-spacing: -.035em; line-height: .95; font-size: clamp(44px, 7.5vw, 104px); text-transform: uppercase; }
+  h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; color: var(--accent); }
+  .cs-hero .lede { margin-top: 3.2vh; font-size: clamp(19px, 2.1vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.3; max-width: 720px; }
+  .cs-hero .lede em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--accent); }
+  .metarow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4vh; }
+  .metarow span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+  .metarow span.hot { color: var(--accent); border-color: rgba(224,164,54,.45); }
+  .metarow a { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; transition: border-color .25s, color .25s; }
+  .metarow a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .cs-sec { display: grid; grid-template-columns: 240px 1fr; gap: 4vw; padding: 7vh 4vw; border-top: 1px solid var(--line); }
+  .cs-sec .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .cs-sec h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 650; letter-spacing: -.025em; line-height: 1.1; margin-bottom: 3vh; }
+  .cs-sec p { font-size: 16px; line-height: 1.75; color: var(--dim); max-width: 700px; }
+  .cs-sec p + p { margin-top: 1.2em; }
+  .cs-sec p b, .cs-sec li b { color: var(--text); font-weight: 600; }
+  .cs-sec ul { list-style: none; max-width: 700px; }
+  .cs-sec li { position: relative; font-size: 16px; line-height: 1.7; color: var(--dim); padding: 14px 0 14px 30px; border-bottom: 1px solid var(--line); }
+  .cs-sec li:last-child { border-bottom: none; }
+  .cs-sec li::before { content: ""; position: absolute; left: 0; top: 26px; width: 14px; height: 1px; background: var(--accent); }
+  .cs-sec li .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+
+  .cs-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); border-top: 1px solid var(--line); }
+  .cs-nums .n { padding: 44px 4vw; border-right: 1px solid var(--line); }
+  .cs-nums .n:last-child { border-right: none; }
+  .cs-nums .v { font-size: clamp(40px, 5vw, 72px); font-weight: 700; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .cs-nums .v i { font-style: normal; color: var(--accent); }
+  .cs-nums .k { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--dim); max-width: 240px; }
+
+  .cs-next { padding: 9vh 4vw; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap; }
+  .cs-next .ask { font-size: clamp(19px, 2.1vw, 28px); font-weight: 600; letter-spacing: -.015em; line-height: 1.3; max-width: 560px; }
+  .cs-next .links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .cs-next .links a { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line); padding-bottom: 3px; transition: border-color .25s, color .25s; }
+  .cs-next .links a:hover { border-color: var(--accent); color: var(--accent); }
+  .cs-next .links a.cta { background: var(--accent); color: #0a0b0e; border-bottom: none; border-radius: 6px; padding: 9px 18px 10px; font-weight: 600; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 26px 4vw; border-top: 1px solid var(--line); }
+  footer .mono { font-size: 10px; }
+
+  @media (max-width: 860px) {
+    .cs-sec { grid-template-columns: 1fr; gap: 18px; }
+    .cs-nums .n { border-right: none; border-top: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="mark">deeptanshu<sup>.</sup>sankhwar</span>
+  <a class="back" href="index.html#work">← Selected work</a>
+</nav>
+
+<header class="cs-hero">
+  <div class="eyebrow">
+    <span class="mono">Case Study 01</span>
+    <span class="mono">Real-estate AI · Multi-tenant SaaS</span>
+  </div>
+  <h1>Broker<em>Bot</em></h1>
+  <p class="lede">Production agent infrastructure for real-estate workflows — the <em>knowledge base</em>, the <em>agent</em>, the <em>harness</em>, and the artifact engine on top.</p>
+  <div class="metarow">
+    <span class="hot">Forward Deployed Engineer</span>
+    <span>TypeScript · Python</span>
+    <span>RAG · MCP · Evals</span>
+    <a href="https://brokerbot.ai" target="_blank" rel="noopener">brokerbot.ai →</a>
+  </div>
+</header>
+
+<section class="cs-sec">
+  <span class="lbl">01 · Problem</span>
+  <div>
+    <h2>Agents that have to be right about messy enterprise knowledge.</h2>
+    <p>BrokerBot is a real-estate AI platform. The hard problem was never "parse documents and embed them" — it was a real ingestion-and-agency platform problem: long-running workflow orchestration, fault tolerance, retries, cost control, structured extraction, and retrieval quality over heterogeneous, jargon-heavy, numeric real-estate data. Reliability and iteration speed were both required at the same time.</p>
+    <p>They needed someone to own that backbone end-to-end — the knowledge layer the agents reason over, the harness they act through, and the artifact pipeline that turns agent output into work clients can use. Not a feature contributor; an owner.</p>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">02 · What I built</span>
+  <div>
+    <h2>The knowledge base, the harness, and the artifact engine.</h2>
+    <ul>
+      <li><span class="tag">Ingestion pipeline</span>Parsing, categorization, summarization, embeddings, and structured extraction across documents, web sources, and cloud-storage connectors — with durable orchestration, retries, and fault tolerance for long-running jobs.</li>
+      <li><span class="tag">Retrieval layer</span>Retrieval quality tuned to real estate queries — long-tail, jargon-heavy, numeric. Citation-proven chunks so agent answers carry provenance a brokerage can defend.</li>
+      <li><span class="tag">Agent harness</span>A tool-calling loop over roughly 120 MCP tools with permissioned access to listings, documents, CRM, and email. Compliance-fenced prompts, human-in-the-loop gates where the workflow demands sign-off.</li>
+      <li><span class="tag">Observability</span>Per-step token and cost telemetry — every tool call attributable, every run replayable, unit economics visible as ingestion volume grows.</li>
+      <li><span class="tag">Artifact engine</span>The layer that lets agents ship finished work: verified PDFs, decks, flyers, websites, video, and audio — renders gated by automated verification, with failure → retry → pass behavior.</li>
+      <li><span class="tag">Eval gates</span>Eval benches gate every release — prompt and tool changes don't ship without passing the suite.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">03 · Engineering decisions</span>
+  <div>
+    <h2>Where the leverage was.</h2>
+    <ul>
+      <li><span class="tag">In-house parsing over vendor</span>Replaced a paid document-parsing vendor with an in-house stack that near-matches LlamaParse accuracy on the workloads that matter — the single largest cost lever in the system.</li>
+      <li><span class="tag">Verification as a gate, not a hope</span>Artifacts don't leave the pipeline unverified. A failed render retries against a spec; a render that can't pass never ships.</li>
+      <li><span class="tag">Telemetry per step</span>Token and cost attribution at the tool-call level, so a slow or expensive run points at a cause instead of a mystery.</li>
+      <li><span class="tag">Discipline at the language boundary</span>The TypeScript ↔ Python seam is a known cost center — every cross-language hop is where errors silently degrade or latency stacks up, so it's treated as a designed interface, not an accident.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">04 · What made it hard</span>
+  <div>
+    <h2>The boring problems are the hard ones.</h2>
+    <p>Real-world real-estate data resists tidy pipelines: partial scans, inconsistent metadata, long-tail jargon, numbers that have to be exact. Cost control on embeddings and LLM calls at production volume requires architectural discipline, not budget alerts. And retrieval quality has no single metric — it takes eval harnesses tuned to the actual queries the product sees in the wild, not a generic benchmark.</p>
+  </div>
+</section>
+
+<section class="cs-sec">
+  <span class="lbl">05 · Outcome</span>
+  <div>
+    <h2>A platform the business runs on.</h2>
+    <p>The knowledge base, agent, and harness ship production real-estate workflows today — and the artifact engine puts finished, verified deliverables in front of clients. The in-house parsing stack displaced a vendor contract while holding near-parity on accuracy.</p>
+  </div>
+</section>
+
+<div class="cs-nums">
+  <div class="n"><div class="v">$100<i>K+</i></div><div class="k">saved annually with an in-house parsing stack near-matching LlamaParse accuracy</div></div>
+  <div class="n"><div class="v">~120</div><div class="k">MCP tools behind permission gates in the production agent loop</div></div>
+  <div class="n"><div class="v">6<i>+</i></div><div class="k">artifact types verified and shipped: PDFs, decks, flyers, sites, video, audio</div></div>
+</div>
+
+<section class="cs-next">
+  <p class="ask">Building an agent system that has to be right about messy data?</p>
+  <div class="links">
+    <a class="cta" href="mailto:deeptanshu.sankhwar@gmail.com">Discuss a project</a>
+    <a href="balance.html">Next case study →</a>
+    <a href="index.html#work">All work</a>
+  </div>
+</section>
+
+<footer>
+  <span class="mono">Deeptanshu Sankhwar — AI Agent Engineer</span>
+  <span class="mono">© 2026</span>
+</footer>
+
+</body>
+</html>
