@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Balance Life Design — Deeptanshu Sankhwar</title>
-<meta name="description" content="Case study: founding-engineer build of production AI infrastructure for an adaptive life-OS — and the Rust/WASM agent harness rebuild that followed." />
+<title>Balance Life Design · Deeptanshu Sankhwar</title>
+<meta name="description" content="Case study: founding-engineer build of production AI infrastructure for an adaptive life-OS, and the Rust/WASM agent harness rebuild that followed." />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Balance Life Design — case study · Deeptanshu Sankhwar" />
+<meta property="og:title" content="Balance Life Design case study · Deeptanshu Sankhwar" />
 <meta property="og:description" content="Zero-to-one AI infrastructure that helped secure seed funding, then a Rust/WASM agent harness rebuild." />
 <meta property="og:image" content="https://deeptanshu-sankhwar.github.io/assets/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -104,7 +104,7 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
     <span class="mono">Consumer AI · Seed-stage</span>
   </div>
   <h1>Balance Life <em>Design</em></h1>
-  <p class="lede">Founding-engineer build of the AI infrastructure behind an adaptive <em>life operating system</em> — and the Rust/WASM agent harness rebuild that followed.</p>
+  <p class="lede">Founding-engineer build of the AI infrastructure behind an adaptive <em>life operating system</em>, and the Rust/WASM agent harness rebuild that followed.</p>
   <div class="metarow">
     <span class="hot">Founding Engineer</span>
     <span>TypeScript · FastAPI · Rust · WASM</span>
@@ -117,8 +117,8 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
   <span class="lbl">01 · Problem</span>
   <div>
     <h2>Zero-to-one AI infrastructure that had to survive investor scrutiny.</h2>
-    <p>Balance is a seed-stage startup building an adaptive life operating system — a consumer AI product that learns from user behavior. They needed the entire AI infrastructure architected and shipped from scratch, not an LLM call bolted onto an existing app.</p>
-    <p>The fundraising round depended on the infrastructure being demonstrably production-grade, not demo-grade — while the product team still needed to iterate on agent behavior weekly without breaking determinism.</p>
+    <p>Balance is a seed-stage startup building an adaptive life operating system, a consumer AI product that learns from user behavior. They needed the entire AI infrastructure architected and shipped from scratch, not an LLM call bolted onto an existing app.</p>
+    <p>The fundraising round depended on the infrastructure being demonstrably production-grade, not demo-grade, while the product team still needed to iterate on agent behavior weekly without breaking determinism.</p>
   </div>
 </section>
 
@@ -127,11 +127,11 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
   <div>
     <h2>The whole AI stack, then the harness it deserved.</h2>
     <ul>
-      <li><span class="tag">AI infrastructure, zero to one</span>Agent orchestration, function-calling specs, prompt management, observability, and feedback loops — architected and shipped from scratch.</li>
-      <li><span class="tag">Agentic behaviors</span>Production-grade agentic AI on OpenAI function-calling specifications — structured tool use rather than free-form generation.</li>
-      <li><span class="tag">Reproducibility + debugging</span>Langfuse for tracing and prompt versioning, with regression evals and controlled configs — agent behavior became measurable, reproducible where possible, and debuggable, not black-boxed.</li>
+      <li><span class="tag">AI infrastructure, zero to one</span>Agent orchestration, function-calling specs, prompt management, observability, and feedback loops, architected and shipped from scratch.</li>
+      <li><span class="tag">Agentic behaviors</span>Production-grade agentic AI on OpenAI function-calling specifications: structured tool use rather than free-form generation.</li>
+      <li><span class="tag">Reproducibility + debugging</span>Langfuse for tracing and prompt versioning, with regression evals and controlled configs. Agent behavior became measurable, reproducible where possible, and debuggable, not black-boxed.</li>
       <li><span class="tag">Full-stack platform</span>TypeScript/Next.js frontend + FastAPI backend on Heroku pipelines, with PostHog session replay and heatmaps closing the loop between product behavior and AI behavior.</li>
-      <li><span class="tag">Nimbus — the harness rebuild</span>When the agent workload outgrew the TypeScript harness: a Rust→WASM edge gateway on Cloudflare Workers (auth, streaming with resume, rate limits, wake triggers) plus a Rust orchestrator in containers — session state machine, tool loop, memory on Postgres, approval gate, scheduling.</li>
+      <li><span class="tag">Nimbus: the harness rebuild</span>When the agent workload outgrew the TypeScript harness: a Rust→WASM edge gateway on Cloudflare Workers (auth, streaming with resume, rate limits, wake triggers) plus a Rust orchestrator in containers: session state machine, tool loop, memory on Postgres, approval gate, scheduling.</li>
     </ul>
 
     <figure class="exhibit">
@@ -187,12 +187,12 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
         <!-- Postgres -->
         <line x1="546" y1="244" x2="546" y2="276" stroke="rgba(236,233,225,.3)" stroke-width="1" marker-end="url(#arrL)"/>
         <rect x="426" y="278" width="240" height="34" rx="6" fill="#12151c" stroke="rgba(236,233,225,.16)"/>
-        <text x="546" y="299" text-anchor="middle" font-size="10.5" letter-spacing="1" fill="#a9a49a">POSTGRES — SESSION + MEMORY</text>
+        <text x="546" y="299" text-anchor="middle" font-size="10.5" letter-spacing="1" fill="#a9a49a">POSTGRES · SESSION + MEMORY</text>
 
-        <text x="360" y="330" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#8a877e">TWO COMPUTE MODELS · ONE SYSTEM — REBUILD UNDER FLIGHT, NO FLAG DAY</text>
+        <text x="360" y="330" text-anchor="middle" font-size="10.5" letter-spacing="1.5" fill="#8a877e">TWO COMPUTE MODELS · ONE SYSTEM · REBUILD UNDER FLIGHT, NO FLAG DAY</text>
       </svg>
       </div>
-      <figcaption>Fig 1 — the nimbus split: stateless WASM ingress at the edge, stateful orchestration in containers, Postgres as the durable floor</figcaption>
+      <figcaption>Fig 1 · the nimbus split: stateless WASM ingress at the edge, stateful orchestration in containers, Postgres as the durable floor</figcaption>
     </figure>
   </div>
 </section>
@@ -202,10 +202,10 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
   <div>
     <h2>Chosen for control, not fashion.</h2>
     <ul>
-      <li><span class="tag">Determinism first</span>Prompt versioning and traced runs from day one — because "the agent did something weird" is only debuggable if behavior is reproducible.</li>
-      <li><span class="tag">WASM at the edge</span>The gateway compiles to WASM on Workers for low-latency edge ingress; the long-running parts Workers can't hold live in containers — two compute models presenting as one system.</li>
-      <li><span class="tag">A real state machine</span>Session and tool-loop correctness modeled as an explicit state machine, not framework magic — because resumability has to be provable, not hopeful.</li>
-      <li><span class="tag">Rebuild under flight</span>The TypeScript product kept serving users while the harness was rebuilt in phases — no flag day, no downtime gamble.</li>
+      <li><span class="tag">Determinism first</span>Prompt versioning and traced runs from day one, because "the agent did something weird" is only debuggable if behavior is reproducible.</li>
+      <li><span class="tag">WASM at the edge</span>The gateway compiles to WASM on Workers for low-latency edge ingress; the long-running parts Workers can't hold live in containers: two compute models presenting as one system.</li>
+      <li><span class="tag">A real state machine</span>Session and tool-loop correctness modeled as an explicit state machine, not framework magic. Resumability has to be provable, not hopeful.</li>
+      <li><span class="tag">Rebuild under flight</span>The TypeScript product kept serving users while the harness was rebuilt in phases: no flag day, no downtime gamble.</li>
     </ul>
   </div>
 </section>
@@ -214,7 +214,7 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
   <span class="lbl">04 · What made it hard</span>
   <div>
     <h2>No infrastructure to lean on, no definition of correct.</h2>
-    <p>A founding-engineer brief on a consumer AI product means no existing infrastructure, no eval data, and no taxonomy for what "correct" agent behavior looks like — you build the definition while building the system. Streaming-with-resume at the edge is easy to demo and genuinely hard to make correct. And the rebuild had to prove itself beside a live product that couldn't afford a misstep.</p>
+    <p>A founding-engineer brief on a consumer AI product means no existing infrastructure, no eval data, and no taxonomy for what "correct" agent behavior looks like. You build the definition while building the system. Streaming-with-resume at the edge is easy to demo and genuinely hard to make correct. And the rebuild had to prove itself beside a live product that couldn't afford a misstep.</p>
   </div>
 </section>
 
@@ -222,7 +222,7 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
   <span class="lbl">05 · Outcome</span>
   <div>
     <h2>Infrastructure that carried a fundraise.</h2>
-    <p>The AI stack I shipped was the demonstrable technical asset during fundraising — the infrastructure helped secure seed funding and onboarded 1,000+ early-access users. The Nimbus harness rebuild is the second act: the same system, re-architected in Rust for the reliability envelope the workload now demands.</p>
+    <p>The AI stack I shipped was the demonstrable technical asset during fundraising. The infrastructure helped secure seed funding and onboarded 1,000+ early-access users. The Nimbus harness rebuild is the second act: the same system, re-architected in Rust for the reliability envelope the workload now demands.</p>
   </div>
 </section>
 
@@ -233,7 +233,7 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
 </div>
 
 <section class="cs-next">
-  <p class="ask">Need AI infrastructure built to survive scrutiny — investors', or production's?</p>
+  <p class="ask">Need AI infrastructure built to survive scrutiny. Investors', or production's?</p>
   <div class="links">
     <a class="cta" href="mailto:deeptanshu.sankhwar@gmail.com">Discuss a project</a>
     <a href="brokerbot.html">← Previous case study</a>
@@ -242,7 +242,7 @@ posthog.init('phc_iOIbwrPKDWJdUD7D840Bgn0PX0DioOpIQTSl9695wBN',{api_host:'https:
 </section>
 
 <footer>
-  <span class="mono">Deeptanshu Sankhwar — AI Agent Engineer</span>
+  <span class="mono">Deeptanshu Sankhwar · AI Agent Engineer</span>
   <span class="mono">© 2026</span>
 </footer>
 
